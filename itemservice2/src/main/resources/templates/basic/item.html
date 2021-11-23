@@ -22,7 +22,7 @@
   <h2 th:if="${param.status}" th:text="'저장 완료!'"></h2>
   <div>
     <label for="itemId">상품 ID</label>
-    <input type="text" id="itemId" th:field="${item.id}" class="form-control"
+    <input type="text" id="itemId" name="id" th:field="${item.id}" class="form-control"
            value="1" readonly>
     <div class="field-error" th:errors="${item.id}"></div>
   </div>
@@ -58,7 +58,7 @@
     <div>등록 지역</div>
     <div th:each="region: ${regions}" class="form-check form-check-inline">
       <input type="checkbox" th:field="${item.regions}" th:value="${region.key}" class="form-check-input" disabled>
-      <label th:for="${#ids.prev('regions')}" th:text="${region.value}">부산</label>
+      <label th:for="${#ids.prev('regions')}" th:text="${region.value}" class="form-check-label">부산</label>
     </div>
   </div>
 
@@ -66,8 +66,8 @@
   <div>
     <div>상품 종류</div>
     <div th:each="type : ${itemTypes}" class="form-check form-check-inline">
-      <input type="radio" th:field="${item.itemType}" th:value="${type.name()}" class="form-check-input" disabled>
-      <label th:for="${#ids.prev('itemType')}" th:value="${type.description}" class="form-check-label">도서</label>
+      <input type="radio" th:field="${item.itemType}" th:value="${type.typeCode}" class="form-check-input" disabled>
+      <label th:for="${#ids.prev('itemType')}" th:text="${type.typeDescription}" class="form-check-label">도서</label>
     </div>
   </div>
 

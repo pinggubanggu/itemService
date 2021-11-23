@@ -3,14 +3,15 @@ package hello.itemservice2.web.item.basic;
 import hello.itemservice2.domain.item.DeliveryCode;
 import hello.itemservice2.domain.item.Item;
 import hello.itemservice2.domain.item.ItemRepository;
+import hello.itemservice2.domain.item.MemoryItemRepository;
 import hello.itemservice2.domain.item.ItemType;
+import hello.itemservice2.domain.item.TypeItem;
 import hello.itemservice2.web.validation.form.ItemSaveForm;
 import hello.itemservice2.web.validation.form.ItemUpdateForm;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import javax.annotation.PostConstruct;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -41,10 +42,20 @@ public class BasicItemController {
     regions.put("JEJU", "제주");
     return regions;
   }
+// Enum을 model값으로 넘겨주기
+//  @ModelAttribute("itemTypes")
+//  public ItemType[] itemTypes() {
+//    return ItemType.values();
+//  }
 
+  // Enum을 Object로 변경해서 model값으로 넘겨주기
   @ModelAttribute("itemTypes")
-  public ItemType[] itemTypes() {
-    return ItemType.values();
+  public List<TypeItem> itemTypes() {
+    List<TypeItem> typeItems = new ArrayList<>();
+    typeItems.add(new TypeItem("BOOK", "도서"));
+    typeItems.add(new TypeItem("FOOD", "식품"));
+    typeItems.add(new TypeItem("ETC", "기타"));
+    return typeItems;
   }
 
   @ModelAttribute("deliveryCodes")
@@ -55,6 +66,7 @@ public class BasicItemController {
     deliveryCodes.add(new DeliveryCode("SLOW", "느린 배송"));
     return deliveryCodes;
   }
+
 
   @GetMapping
   public String items(Model model) {
@@ -87,7 +99,8 @@ public class BasicItemController {
     return "redirect:/basic/items/" + item.getId();
   }
 
-  @PostMapping("/add")
+  // 김영한 강사님 원래 버전
+//  @PostMapping("/add")
   public String addItem2(@Valid @ModelAttribute("item") ItemSaveForm form, BindingResult result, RedirectAttributes redirectAttributes) {
     
     // 특정 필드 예외가 아닌 전체 예외
@@ -118,6 +131,45 @@ public class BasicItemController {
     item.setItemType(form.getItemType());
     item.setDeliveryCode(form.getDeliveryCode());
     
+    Item saveItem = itemRepository.save(item);
+    redirectAttributes.addAttribute("itemId", saveItem.getId());
+    redirectAttributes.addAttribute("status", true);
+    return "redirect:/basic/items/{itemId}";
+  }
+
+  // Regions 값을 하나의 값만 넘기기
+  // TODO (나중에 Regions 값을 여러개 넘겨서 데이터베이스에 담는거 해보기)
+  @PostMapping("/add")
+  public String addItem2_1(@Valid @ModelAttribute("item") ItemSaveForm form, BindingResult result, RedirectAttributes redirectAttributes) {
+
+    // 특정 필드 예외가 아닌 전체 예외
+    if(form.getPrice() != null && form.getQuantity() != null) {
+      int resultPrice = form.getPrice() * form.getQuantity();
+      if(resultPrice < 10000) {
+        result.reject("totalPriceMin", new Object[]{ 10000,resultPrice}, null);
+      }
+    }
+
+
+    if(result.hasErrors()) {
+      log.info("errors={}", result);
+      return "form/addForm";
+    }
+
+    log.info("item.open={}", form.getOpen());
+    log.info("item.regions={}", form.getRegions());
+    log.info("item.itemType={}", form.getItemType());
+
+    // 성공 로직
+    Item item = new Item();
+    item.setItemName(form.getItemName());
+    item.setPrice(form.getPrice());
+    item.setQuantity(form.getQuantity());
+    item.setOpen(form.getOpen());
+    item.setRegions(form.getRegions());
+    item.setItemType(form.getItemType());
+    item.setDeliveryCode(form.getDeliveryCode());
+
     Item saveItem = itemRepository.save(item);
     redirectAttributes.addAttribute("itemId", saveItem.getId());
     redirectAttributes.addAttribute("status", true);

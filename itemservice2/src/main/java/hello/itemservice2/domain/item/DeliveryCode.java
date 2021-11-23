@@ -14,4 +14,11 @@ public class DeliveryCode {
 
   private String code;
   private String displayName;
+
+  public DeliveryCode() {
+  }
+
+  public DeliveryCode(String code) {
+    this.code = code;
+  }
 }

@@ -2,13 +2,12 @@ package hello.itemservice2.domain.item;
 
 import static org.assertj.core.api.Assertions.*;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
-public class ItemRepositoryTest {
+public class MemoryItemRepositoryTest {
 
-  ItemRepository itemRepository = new ItemRepository();
+  MemoryItemRepository itemRepository = new MemoryItemRepository();
 
   @AfterEach
   public void afterEach() {

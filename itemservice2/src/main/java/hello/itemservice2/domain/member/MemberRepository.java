@@ -1,41 +1,18 @@
 package hello.itemservice2.domain.member;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 
-@Slf4j
 @Repository
-public class MemberRepository {
-  private static final Map<Long, Member> store = new HashMap<>();
-  private static long sequence = 0L;
+public interface MemberRepository {
 
-  public Member save(Member member) {
-    member.setId(++sequence);
-    log.info("save:member={}",member);
-    store.put(member.getId(), member);
-    return member;
-  }
+  Member save(Member member);
 
-  public Member findById(Long id) {
-    return store.get(id);
-  }
+  Member findById(Long id);
 
-  public Optional<Member> findByLoginId(String loginId) {
-    return findAll().stream()
-                    .filter(m -> m.getLoginId().equals(loginId))
-                    .findFirst();
-  }
+  Optional<Member> findByLoginId(String loginId);
 
-  public List<Member> findAll() {
-    return new ArrayList<>(store.values());
-  }
+  List<Member> findAll();
 
-  public void clearStore() {
-    store.clear();
-  }
 }

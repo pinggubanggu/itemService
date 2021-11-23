@@ -1,44 +1,17 @@
 package hello.itemservice2.domain.item;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class ItemRepository {
+public interface ItemRepository {
 
-  private static final Map<Long, Item> store = new HashMap<>();
-  private static long sequence = 0L;
+  Item save(Item item);
 
-  public Item save(Item item) {
-    item.setId(++sequence);
-    store.put(item.getId(), item);
-    return item;
-  }
+  Item findById(Long id);
 
-  public Item findById(Long id) {
-    return store.get(id);
-  }
+  List<Item> findAll();
 
-  public List<Item> findAll() {
-    return new ArrayList<Item>(store.values());
-  }
-
-  public void update(Long itemId, Item updateParam) {
-    Item findItem= findById(itemId);
-    findItem.setItemName(updateParam.getItemName());
-    findItem.setPrice(updateParam.getPrice());
-    findItem.setQuantity(updateParam.getQuantity());
-    findItem.setItemType(updateParam.getItemType());
-    findItem.setOpen(updateParam.getOpen());
-    findItem.setDeliveryCode(updateParam.getDeliveryCode());
-    findItem.setRegions(updateParam.getRegions());
-  }
-
-  public void clearStore() {
-    store.clear();
-  }
+  void update(Long itemId, Item updateParam);
 
 }
