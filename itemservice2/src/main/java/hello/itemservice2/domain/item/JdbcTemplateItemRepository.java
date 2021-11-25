@@ -85,4 +85,10 @@ public class JdbcTemplateItemRepository implements ItemRepository{
         , updateParam.getRegions().get(0), updateParam.getItemType().getTypeCode() ,updateParam.getDeliveryCode().getCode(), itemId);
 
   }
+
+  @Override
+  public Long delete(Long itemId) {
+    jdbcTemplate.update("Delete from itm_tb where ITM_ID = ?", itemId);
+    return itemId;
+  }
 }

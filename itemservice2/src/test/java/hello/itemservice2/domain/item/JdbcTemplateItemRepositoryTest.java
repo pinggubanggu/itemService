@@ -1,6 +1,7 @@
 package hello.itemservice2.domain.item;
 
 import static org.assertj.core.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -68,6 +69,34 @@ public class JdbcTemplateItemRepositoryTest {
     //then
     Item updateItem = itemRepository.findById(saveItem.getId());
     assertThat(updateItem.getItemName()).isEqualTo("곰인형");
+  }
+
+  @Test
+  void 상품_삭제() {
+
+    //given
+    Item item = new Item();
+    item.setItemName("장난감");
+    item.setPrice(20000);
+    item.setQuantity(10);
+    item.setOpen(true);
+
+    List<String> region = new ArrayList<>();
+    region.add("SEOUL");
+
+    item.setRegions(region);
+    item.setItemType(new TypeItem("BOOK"));
+    item.setDeliveryCode(new DeliveryCode("FAST"));
+
+    Item saveItem = itemRepository.save(item);
+
+    //when
+    Long removeItemId = itemRepository.delete(saveItem.getId());
+
+    //then
+    IndexOutOfBoundsException e = assertThrows(
+        IndexOutOfBoundsException.class,
+        () -> itemRepository.findById(removeItemId));
   }
 
 }

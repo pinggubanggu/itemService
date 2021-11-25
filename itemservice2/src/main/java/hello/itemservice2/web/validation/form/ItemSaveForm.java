@@ -24,12 +24,11 @@ public class ItemSaveForm {
   @Max(value = 9999)
   private Integer quantity;
 
-  @NotNull
   private Boolean open; //판매 여부
-  @NotNull
+  @NotNull(message = "한 가지를 선택해주세요")
   private List<String> regions; //등록 지역
-  @NotNull
+  @NotNull(message = "한 가지를 선택해주세요")
   private TypeItem itemType; //상품 종류
-  @NotNull
+  @NotNull(message = "한 가지를 선택해주세요")
   private DeliveryCode deliveryCode; //배송 방식
 }

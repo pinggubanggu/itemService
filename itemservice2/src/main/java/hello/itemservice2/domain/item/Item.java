@@ -5,6 +5,7 @@ import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Null;
 import lombok.Data;
 
 @Data
@@ -20,6 +21,7 @@ public class Item { //TODO 관계형 데이터베이스 만들어서 JOIN 써보
   
   private Boolean open; //판매 여부
   private List<String> regions; //등록 지역
+
   private TypeItem itemType; //상품 종류
   private DeliveryCode deliveryCode; //배송 방식
   

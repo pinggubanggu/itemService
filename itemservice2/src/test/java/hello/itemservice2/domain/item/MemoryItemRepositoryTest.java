@@ -1,7 +1,9 @@
 package hello.itemservice2.domain.item;
 
 import static org.assertj.core.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.*;
 
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
@@ -52,6 +54,21 @@ public class MemoryItemRepositoryTest {
     assertThat(updateItem.getItemName()).isEqualTo(item2.getItemName());
     assertThat(updateItem.getPrice()).isEqualTo(item2.getPrice());
     assertThat(updateItem.getQuantity()).isEqualTo(item2.getQuantity());
+  }
+
+  @Test
+  void delete() {
+    //given
+    Item item = new Item("spring", 10000, 100);
+    Item saveItem = itemRepository.save(item);
+
+    //when
+    Long deleteItem = itemRepository.delete(saveItem.getId());
+    Item id = itemRepository.findById(deleteItem);
+
+    //then
+    NullPointerException e = assertThrows(NullPointerException.class,
+        () -> id.getId());
   }
 
 

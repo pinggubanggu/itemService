@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
-@AllArgsConstructor
 public class TypeItem {
 
   private String typeCode;
@@ -17,4 +16,8 @@ public class TypeItem {
     this.typeCode = typeCode;
   }
 
+  public TypeItem(String typeCode, String typeDescription) {
+    this.typeCode = typeCode;
+    this.typeDescription = typeDescription;
+  }
 }

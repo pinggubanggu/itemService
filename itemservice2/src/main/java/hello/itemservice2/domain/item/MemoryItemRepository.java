@@ -36,6 +36,12 @@ public class MemoryItemRepository implements ItemRepository{
     findItem.setRegions(updateParam.getRegions());
   }
 
+  @Override
+  public Long delete(Long itemId) {
+    Item removeItem = store.remove(itemId);
+    return removeItem.getId();
+  }
+
   public void clearStore() {
     store.clear();
   }

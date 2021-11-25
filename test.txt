@@ -1,0 +1,14 @@
+<<<<<<< HEAD
+function add_master(x,y) {
+=======
+function add_test(x,y) {
+>>>>>>> test
+	console.log(x);
+	console.log(y);
+	console.log(x+y);
+	return x+y; 
+	}
+
+function add(x,y){
+	return x + y;
+	}
