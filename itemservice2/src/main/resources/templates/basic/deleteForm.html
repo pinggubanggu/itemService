@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <link href="../css/bootstrap.min.css" rel="stylesheet"
+        th:href="@{/css/bootstrap.min.css}">
+
+  <style>
+    .container {
+      max-width : 700px;
+    }
+    .p-box {
+      font-size: 20px;
+      font-weight: bold;
+      margin-top: 20px;
+      margin-bottom: 0;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="p-3 text-center">
+    <p class="p-box" th:text="|${itemName} 상품이 삭제 완료 되었습니다.|">상품 삭제 완료!</p>
+  </div>
+
+  <hr class="my-4">
+
+  <div class="row">
+    <div class="col">
+      <button class="w-100 btn btn-secondary btn-lg"
+              onclick=""
+              th:onclick="|location.href='@{/}'|">홈으로</button>
+    </div>
+    <div class="col">
+      <button class="w-100 btn btn-primary btn-lg"
+              onclick=""
+              th:onclick="|location.href='@{/basic/items/}'|">상품 목록</button>
+    </div>
+  </div>
+</div> <!-- container -->
+</body>
+</html>
