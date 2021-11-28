@@ -73,10 +73,10 @@
 
   <!-- SELECT -->
   <div>
-    <div>배송 방식</div>
-    <select th:field="${item.deliveryCode}" class="form-select" disabled>
-      <option value="">==배송 방식 선택==</option>
-      <option th:each="deliveryCode : ${deliveryCodes}" th:value="${deliveryCode.code}" th:text="${deliveryCode.displayName}" >빠른 배송</option>
+    <div>상품 위치</div>
+    <select th:field="${item.positionCode}" class="form-select" disabled>
+      <option value="">==상품 위치 선택==</option>
+      <option th:each="positionCode : ${positionCodes}" th:value="${positionCode.code}" th:text="${positionCode.displayName}">생활용품</option>
     </select>
   </div>
 

@@ -2,6 +2,7 @@ package hello.itemservice2.web.validation.form;
 
 import hello.itemservice2.domain.item.DeliveryCode;
 import hello.itemservice2.domain.item.ItemType;
+import hello.itemservice2.domain.item.PositionCode;
 import hello.itemservice2.domain.item.TypeItem;
 import java.util.List;
 import javax.validation.constraints.Max;
@@ -30,5 +31,5 @@ public class ItemSaveForm {
   @NotNull(message = "한 가지를 선택해주세요")
   private TypeItem itemType; //상품 종류
   @NotNull(message = "한 가지를 선택해주세요")
-  private DeliveryCode deliveryCode; //배송 방식
+  private PositionCode positionCode; // 상품 위치
 }
