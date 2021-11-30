@@ -32,6 +32,7 @@ public class MemberController {
     }
 
     memberService.join(member);
+    // TODO ***님 회원가입이 완료되었습니다. 하나 만들기(-)
     return "redirect:/";
   }
 }

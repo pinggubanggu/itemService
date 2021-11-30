@@ -5,6 +5,7 @@ import hello.itemservice2.domain.item.Item;
 import hello.itemservice2.domain.item.ItemRepository;
 import hello.itemservice2.domain.item.MemoryItemRepository;
 import hello.itemservice2.domain.item.ItemType;
+import hello.itemservice2.domain.item.PositionCode;
 import hello.itemservice2.domain.item.TypeItem;
 import hello.itemservice2.web.validation.form.ItemSaveForm;
 import hello.itemservice2.web.validation.form.ItemUpdateForm;
@@ -59,13 +60,22 @@ public class BasicItemController {
     return typeItems;
   }
 
-  @ModelAttribute("deliveryCodes")
-  public List<DeliveryCode> deliveryCodes() {
-    List<DeliveryCode> deliveryCodes = new ArrayList<>();
-    deliveryCodes.add(new DeliveryCode("FAST", "빠른 배송"));
-    deliveryCodes.add(new DeliveryCode("NORMAL", "일반 배송"));
-    deliveryCodes.add(new DeliveryCode("SLOW", "느린 배송"));
-    return deliveryCodes;
+//  @ModelAttribute("deliveryCodes")
+//  public List<DeliveryCode> deliveryCodes() {
+//    List<DeliveryCode> deliveryCodes = new ArrayList<>();
+//    deliveryCodes.add(new DeliveryCode("FAST", "빠른 배송"));
+//    deliveryCodes.add(new DeliveryCode("NORMAL", "일반 배송"));
+//    deliveryCodes.add(new DeliveryCode("SLOW", "느린 배송"));
+//    return deliveryCodes;
+//  }
+
+  @ModelAttribute("positionCodes")
+  public List<PositionCode> positionCodes() {
+    List<PositionCode> positionCodes = new ArrayList<>();
+    positionCodes.add(new PositionCode("A", "생활용품"));
+    positionCodes.add(new PositionCode("B", "식품"));
+    positionCodes.add(new PositionCode("C", "도서 및 잡화"));
+    return positionCodes;
   }
 
 
@@ -130,7 +140,7 @@ public class BasicItemController {
     item.setOpen(form.getOpen());
     item.setRegions(form.getRegions());
     item.setItemType(form.getItemType());
-    item.setDeliveryCode(form.getDeliveryCode());
+    item.setPositionCode(form.getPositionCode());
     
     Item saveItem = itemRepository.save(item);
     redirectAttributes.addAttribute("itemId", saveItem.getId());
@@ -169,7 +179,7 @@ public class BasicItemController {
     item.setOpen(form.getOpen());
     item.setRegions(form.getRegions());
     item.setItemType(form.getItemType());
-    item.setDeliveryCode(form.getDeliveryCode());
+    item.setPositionCode(form.getPositionCode());
 
     Item saveItem = itemRepository.save(item);
     redirectAttributes.addAttribute("itemId", saveItem.getId());
@@ -223,7 +233,7 @@ public class BasicItemController {
     item.setOpen(form.getOpen());
     item.setRegions(form.getRegions());
     item.setItemType(form.getItemType());
-    item.setDeliveryCode(form.getDeliveryCode());
+    item.setPositionCode(form.getPositionCode());
 
     itemRepository.update(itemId, item);
     return "redirect:/basic/items/{itemId}";

@@ -32,7 +32,7 @@ public class MemoryItemRepository implements ItemRepository{
     findItem.setQuantity(updateParam.getQuantity());
     findItem.setItemType(updateParam.getItemType());
     findItem.setOpen(updateParam.getOpen());
-    findItem.setDeliveryCode(updateParam.getDeliveryCode());
+    findItem.setPositionCode(updateParam.getPositionCode());
     findItem.setRegions(updateParam.getRegions());
   }
 

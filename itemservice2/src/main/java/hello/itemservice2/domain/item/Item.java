@@ -23,7 +23,7 @@ public class Item { //TODO 관계형 데이터베이스 만들어서 JOIN 써보
   private List<String> regions; //등록 지역
 
   private TypeItem itemType; //상품 종류
-  private DeliveryCode deliveryCode; //배송 방식
+  private PositionCode positionCode; // 물품 위치
   
   public Item(String itemName, Integer price, Integer quantity) {
     this.itemName = itemName;
